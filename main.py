@@ -6,30 +6,13 @@ import util
 from sort.sort import Sort
 from util import get_car, read_license_plate, write_csv
 
-# ==========================================
-# 1. DOWNLOAD DATASET & TRAIN CUSTOM MODEL
-# ==========================================
-'''
-rf = Roboflow(api_key="7iTAFrsttIYR5PP137eq") # Note: Keep your API key private in production
-project = rf.workspace("anuj-deshmukh").project("license-plate-recognition-rxg4e-twhn9")
-version = project.version(1)
-dataset = version.download("yolov8")
 
-# Train a YOLOv8 model on your downloaded Roboflow dataset
-# (Adjust epochs based on your accuracy requirements)
-print("Training new license plate detector...")
-trainer = YOLO('yolov8n.pt') 
-trainer.train(data=f"D:/automatic-number-plate-recognition-python-yolov8-main/License_Plate_Recognition.v1i.yolov8/data.yaml", epochs=2, imgsz=640)
-'''
-# ==========================================
-# 2. INFERENCE & TRACKING
-# ==========================================
 results = {}
 mot_tracker = Sort()
 
 # Load models
 coco_model = YOLO('yolov8n.pt')  # Standard YOLO model for vehicle detection
-# Load your newly trained Roboflow model (Ultralytics saves it here by default)
+
 license_plate_detector = YOLO('runs/detect/train/weights/best.pt')
 
 # Load video
